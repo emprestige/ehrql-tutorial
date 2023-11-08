@@ -40,6 +40,11 @@ was_adult = (patients.age_on(index_date) >= 18) & (
     patients.age_on(index_date) <= 110
 )
 
+was_alive = (
+    patients.date_of_death.is_after(index_date)
+    | patients.date_of_death.is_null()
+)
+
 was_registered = practice_registrations.for_patient_on(
     index_date
 ).exists_for_patient()
